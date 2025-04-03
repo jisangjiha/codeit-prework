@@ -1,0 +1,164 @@
+/**이미지 input 위치, 이미지 가져오고 input 모양 변경, 전체 height */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 1200px;
+  max-width: 1200px;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.formContainer {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 311px;
+
+  background-color: var(--slate-50);
+  box-sizing: border-box;
+  border: 2px dashed var(--slate-300);
+  border-radius: 24px;
+
+  position: relative;
+
+  & input {
+    display: none;
+  }
+}
+
+.fileButton {
+  position: absolute;
+
+  bottom: 16px;
+  right: 16px;
+
+  z-index: 10;
+  cursor: pointer;
+}
+
+.memoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 311px;
+
+  border-radius: 24px;
+
+  background-image: url("./memo.svg");
+  background-size: cover;
+  background-position: center;
+
+  & label {
+    color: var(--amber-800);
+    font-weight: 800;
+    margin: 24px 0 16px 0;
+  }
+
+  & textarea {
+    height: 229px;
+
+    border: none;
+
+    background-color: transparent;
+  }
+}
+
+.buttonContainer {
+  & button {
+    width: 168px;
+    height: 56px;
+
+    box-sizing: border-box;
+    border: 2px solid var(--slate-900);
+    border-radius: 24px;
+    box-shadow: 2px 2px var(--slate-900);
+  }
+}
+
+.modifyButton {
+  margin-right: 16px;
+
+  background-color: var(--slate-200);
+}
+
+.deleteButton {
+  background-color: var(--rose-500);
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .formContainer {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 343px;
+  }
+
+  .memoContainer {
+    width: 343px;
+    margin: 24px 0 0 0;
+
+    & textarea {
+      width: 311px;
+    }
+  }
+}
+
+/* 테블릿 */
+@media (min-width: 768px) {
+  .formContainer {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    width: 696px;
+  }
+
+  .memoContainer {
+    width: 696px;
+    margin: 24px 0 0 0;
+
+    & textarea {
+      width: 664px;
+    }
+  }
+}
+
+/* 데스크탑 */
+@media (min-width: 1024px) {
+  .formContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .imageContainer {
+    width: 384px;
+  }
+
+  .memoContainer {
+    width: 588px;
+    margin: 0 0 0 24px;
+
+    & textarea {
+      width: 557px;
+    }
+  }
+
+  .buttonContainer {
+    width: 996px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

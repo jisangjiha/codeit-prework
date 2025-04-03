@@ -1,0 +1,41 @@
+.detailContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 64px;
+  width: 343px;
+  max-width: 1200px;
+
+  margin: 24px 0;
+  box-sizing: border-box;
+  border: 2px solid var(--slate-900);
+  border-radius: 24px;
+
+  background-color: #ffffff;
+
+  font-size: 20px;
+  text-decoration: underline;
+
+  & img {
+    margin-right: 16px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+}
+
+/* 테블릿 */
+@media (min-width: 768px) {
+  .detailContainer {
+    width: 696px;
+  }
+}
+
+/* 데스크탑 */
+@media (min-width: 1024px) {
+  .detailContainer {
+    width: 996px;
+  }
+}

@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  max-width: 1200px;
+  margin: 24px auto;
+}
+
+.inputBox,
+.addButton {
+  box-sizing: border-box;
+  border: 2px solid var(--slate-900);
+  border-radius: 24px;
+  box-shadow: 2px 2px var(--slate-900);
+}
+
+.inputBox {
+  width: 280px;
+  height: 56px;
+  padding: 0 0 0 24px;
+  margin: 0;
+
+  background-color: var(--slate-100);
+
+  & ::placeholder {
+    color: var(--slate-500);
+  }
+
+  & :focus {
+    outline: none;
+  }
+}
+
+.addButton {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  margin-left: 8px;
+
+  background-color: var(--slate-200);
+
+  font-weight: 700;
+}
+
+.inlineButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & div {
+    margin: 0 0 0 4px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .inlineButton {
+    & div {
+      display: none;
+    }
+  }
+}
+
+/* 테블릿 */
+@media (min-width: 768px) {
+  .inputBox {
+    width: 518px;
+  }
+
+  .addButton {
+    margin-left: 16px;
+    width: 162px;
+  }
+}
+
+/* 데스크탑 */
+@media (min-width: 1024px) {
+  .inputBox {
+    width: 1016px;
+  }
+
+  .addButton {
+    margin-left: 16px;
+    width: 168px;
+  }
+}

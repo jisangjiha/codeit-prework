@@ -1,0 +1,101 @@
+.TodoContainer,
+.DoneContainer {
+  width: 344px;
+  color: var(--slate-800);
+}
+
+.checkLists {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checkTodoList,
+.checkDoneList {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin: 8px 0;
+
+  box-sizing: border-box;
+  border: 2px solid var(--slate-900);
+  border-radius: 27px;
+
+  & .checkbox {
+    margin: 0 12px 0 16px;
+  }
+}
+
+.checkTodoList {
+  background-color: #ffffff;
+}
+
+.checkDoneList {
+  background-color: var(--violet-100);
+  text-decoration: line-through;
+}
+
+.none {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 48px;
+
+  & .desktopImg {
+    width: 240px;
+    height: 240px;
+    margin-bottom: 24px;
+  }
+
+  & .mobileImg {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 16px;
+  }
+
+  & p {
+    margin: 0;
+    color: var(--slate-400);
+  }
+}
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .desktopImg {
+    display: none;
+  }
+}
+
+/* 테블릿 */
+@media (min-width: 768px) {
+  .mobileImg {
+    display: none;
+  }
+
+  .TodoContainer,
+  .DoneContainer {
+    width: 696px;
+  }
+}
+
+/* 데스크탑 */
+@media (min-width: 1024px) {
+  .mobileImg {
+    display: none;
+  }
+
+  .TodoContainer,
+  .DoneContainer {
+    width: 588px;
+  }
+
+  .TodoContainer {
+    margin-right: 12px;
+  }
+
+  .DoneContainer {
+    margin-left: 12px;
+  }
+}

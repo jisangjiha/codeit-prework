@@ -1,17 +1,17 @@
 "use client";
 
 import React from "react";
-import { Todo } from "../types";
+import { Todo } from "@/types";
 import CheckList from "@/components/CheckList";
 
-import todo from "../assets/todo.svg";
-import done from "../assets/done.svg";
-import checkboxEmpty from "../assets/checkbox-empty.svg";
-import checkboxFilled from "../assets/checkbox-filled.svg";
-import noneTodoLarge from "../assets/none-todo-large.svg";
-import noneTodoSmall from "../assets/none-todo-small.svg";
-import noneDoneLarge from "../assets/none-done-large.svg";
-import noneDoneSmall from "../assets/none-done-small.svg";
+import todo from "@/assets/todo.svg";
+import done from "@/assets/done.svg";
+import checkboxEmpty from "@/assets/checkbox-empty.svg";
+import checkboxFilled from "@/assets/checkbox-filled.svg";
+import noneTodoLarge from "@/assets/none-todo-large.svg";
+import noneTodoSmall from "@/assets/none-todo-small.svg";
+import noneDoneLarge from "@/assets/none-done-large.svg";
+import noneDoneSmall from "@/assets/none-done-small.svg";
 
 interface ListsProps {
   activeTodos: Todo[];

@@ -3,7 +3,7 @@
 import React, { useState, KeyboardEvent } from "react";
 
 import styles from "./TodoInput.module.css";
-import plus from "../assets/plus.svg";
+import plus from "@/assets/plus.svg";
 import Image from "next/image";
 
 interface TodoInputProps {

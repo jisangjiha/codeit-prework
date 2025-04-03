@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import TodoInput from "@/mainpage/TodoInput";
-import Lists from "@/mainpage/Lists";
+import TodoInput from "./mainpage/TodoInput";
+import Lists from "./mainpage/Lists";
 import { Todo } from "@/types";
 
 import styles from "./page.module.css";

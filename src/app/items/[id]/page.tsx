@@ -1,16 +1,15 @@
 "use client";
 
-import CheckListDetail from "@/components/CheckListDetail";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Todo } from "@/types";
+
+import CheckListDetail from "@/components/CheckListDetail";
+import DetailImg from "./DetailImg";
+import DetailMemo from "./DetailMemo";
 
 import styles from "./page.module.css";
-import imgBackgoround from "@/assets/img.svg";
-import fileAdd from "@/assets/fileAdd.svg";
-import fileChange from "@/assets/fileChange.svg";
-import Image from "next/image";
 import Button from "@/components/Button";
-import { Todo } from "@/types";
-import { useParams } from "next/navigation";
 
 export default function Page() {
   const params = useParams();
@@ -129,41 +128,8 @@ export default function Page() {
         title={currentTodo?.text || "Todo 상세"}
       />
       <div className={styles.formContainer}>
-        <div className={styles.imageContainer}>
-          {imageUrl ? (
-            <img
-              className={styles.uploadedImg}
-              src={imageUrl}
-              alt="업로드된 이미지"
-            />
-          ) : (
-            <Image src={imgBackgoround} alt="업로드 전 배경 이미지" />
-          )}
-          <label htmlFor="todoImage" className={styles.fileButton}>
-            {imageUrl ? (
-              <Image src={fileChange} alt={"이미지 변경"} />
-            ) : (
-              <Image src={fileAdd} alt={"이미지 추가"} />
-            )}
-          </label>
-          <input
-            id="todoImage"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            style={{ display: "none" }}
-          />
-        </div>
-        <div className={styles.memoContainer}>
-          <label htmlFor="todoMemo">Memo</label>
-          <textarea
-            id="todoMemo"
-            className={styles.textarea}
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            placeholder="메모를 입력하세요"
-          />
-        </div>
+        <DetailImg imageUrl={imageUrl} handleImageUpload={handleImageUpload} />
+        <DetailMemo memo={memo} onChangeMemo={setMemo} />
       </div>
       <div className={styles.buttonContainer}>
         <Button

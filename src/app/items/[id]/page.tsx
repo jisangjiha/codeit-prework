@@ -10,7 +10,8 @@ import DetailMemo from "./DetailMemo";
 import Button from "@/components/Button";
 
 import styles from "./page.module.css";
-import { fetchTodoById, toggleTodoStatus, updateTodo, deleteTodo } from "@/api";
+
+import { fetchTodos, updateTodo, deleteTodo } from "@/api";
 
 export default function Page() {
   const { id } = useParams();
@@ -24,7 +25,7 @@ export default function Page() {
   useEffect(() => {
     if (!todoId) return;
 
-    fetchTodoById(todoId).then((foundTodo) => {
+    fetchTodos(todoId).then((foundTodo) => {
       if (foundTodo) {
         setCurrentTodo(foundTodo);
         setMemo(foundTodo.memo || "");
@@ -33,27 +34,32 @@ export default function Page() {
     });
   }, [todoId]);
 
+  const handleChangeTitle = (newTitle: string) => {
+    if (!currentTodo || newTitle.trim() === "") return;
+    updateTodo(todoId, { name: newTitle }).then((updatedData) => {
+      setCurrentTodo((prev) => (prev ? { ...prev, ...updatedData } : prev));
+    });
+  };
+
   const toggleTodo = () => {
     if (!currentTodo) return;
 
-    const updatedTodo = {
-      ...currentTodo,
-      isCompleted: !currentTodo.isCompleted,
-    };
-
-    toggleTodoStatus(todoId, !currentTodo.isCompleted)
-      .then((updatedData) => {
+    updateTodo(todoId, { isCompleted: !currentTodo.isCompleted }).then(
+      (updatedData) => {
         setCurrentTodo((prev) => (prev ? { ...prev, ...updatedData } : prev));
-      })
-      .catch((error) => {
-        console.error("토글 오류:", error);
-      });
+      }
+    );
   };
 
   const handleModify = () => {
     if (!currentTodo) return;
 
-    const updatedTodo = { ...currentTodo, memo, imageUrl };
+    const updatedTodo = {
+      name: currentTodo.name,
+      isCompleted: currentTodo.isCompleted,
+      memo: memo,
+      imageUrl: imageUrl,
+    };
 
     updateTodo(todoId, updatedTodo).then((updatedData) => {
       setCurrentTodo((prev) => (prev ? { ...prev, ...updatedData } : prev));
@@ -78,6 +84,7 @@ export default function Page() {
         }
         onToggle={toggleTodo}
         title={currentTodo?.name || "Todo 상세"}
+        onTitleChange={handleChangeTitle}
       />
       <div className={styles.formContainer}>
         <DetailImg imageUrl={imageUrl} setImageUrl={setImageUrl} />
@@ -86,11 +93,13 @@ export default function Page() {
       <div className={styles.buttonContainer}>
         <Button
           className={styles.modifyButton}
+          checkOrX={true}
           buttonContent="수정 완료"
           onClickButton={handleModify}
         />
         <Button
           className={styles.deleteButton}
+          checkOrX={false}
           buttonContent="삭제하기"
           onClickButton={handleDelete}
         />

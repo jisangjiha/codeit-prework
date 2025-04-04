@@ -1,43 +1,52 @@
-const baseUrl = "https://assignment-todolist-api.vercel.app";
+import { Todo } from "@/types";
 
-// 테스트
+const baseUrl = "https://assignment-todolist-api.vercel.app";
 const tenantId = "test-id-1";
 
-export async function fetchTodos() {
-  const res = await fetch(`${baseUrl}/api/${tenantId}/items`);
-  if (!res.ok) throw new Error("Failed to fetch todos");
-  return res.json();
-}
+// 전체 혹은 특정 Todo 가져오기
+export const fetchTodos = (id?: string) => {
+  const url = id
+    ? `${baseUrl}/api/${tenantId}/items/${id}`
+    : `${baseUrl}/api/${tenantId}/items`;
 
-export async function createTodo(text: string) {
-  if (!text || !text.trim()) {
-    throw new Error("Text cannot be empty");
-  }
+  return fetch(url).then((res) => {
+    if (!res.ok) throw new Error("Failed to fetch todos");
+    return res.json();
+  });
+};
 
-  const payload = { name: text };
+// Todo 생성
+export const createTodo = (name: string) => {
+  const payload = { name };
 
-  const res = await fetch(`${baseUrl}/api/${tenantId}/items`, {
+  return fetch(`${baseUrl}/api/${tenantId}/items`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
+  }).then((res) => {
+    if (!res.ok) throw new Error("Failed to create todo");
+    return res.json();
   });
+};
 
-  if (!res.ok) throw new Error("Failed to create todo");
-  return res.json();
-}
-
-export async function toggleTodoStatus(id: string, completed: boolean) {
-  const res = await fetch(`${baseUrl}/api/${tenantId}/items/${id}`, {
+// Todo 업데이트
+export const updateTodo = (id: string, updatedTodo: Partial<Todo>) => {
+  return fetch(`${baseUrl}/api/${tenantId}/items/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ isCompleted: completed }),
+    body: JSON.stringify(updatedTodo),
+  }).then((res) => {
+    if (!res.ok) throw new Error("Failed to update todo");
+    return res.json();
   });
+};
 
-  const result = await res.text(); // 👈 JSON으로 파싱 전에 응답 보기!
-  if (!res.ok) {
-    console.error("🔴 PATCH 응답 오류:", result);
-    throw new Error("Failed to toggle todo status");
-  }
-
-  return JSON.parse(result); // 응답이 유효하다면 다시 JSON으로 파싱
-}
+// Todo 삭제
+export const deleteTodo = (id: string) => {
+  return fetch(`${baseUrl}/api/${tenantId}/items/${id}`, {
+    method: "DELETE",
+  }).then((res) => {
+    if (!res.ok) throw new Error("삭제 실패");
+    return res.json();
+  });
+};

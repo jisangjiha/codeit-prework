@@ -3,12 +3,14 @@ import styles from "./CheckListDetail.module.css";
 import Image from "next/image";
 import checkboxEmpty from "@/assets/checkbox-empty.svg";
 import checkboxFilled from "@/assets/checkbox-filled.svg";
+import { useEffect, useState } from "react";
 
 interface CheckListDetailProps {
   activeTodos: Todo[];
   completedTodos: Todo[];
   onToggle: (id: string) => void;
   title: string;
+  onTitleChange?: (newTitle: string) => void;
 }
 
 export default function CheckListDetail({
@@ -16,7 +18,30 @@ export default function CheckListDetail({
   completedTodos = [],
   onToggle,
   title,
+  onTitleChange,
 }: CheckListDetailProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState(title);
+
+  useEffect(() => {
+    setNewTitle(title);
+  }, [title]);
+
+  const handleTitleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTitle(e.target.value);
+  };
+
+  const handleTitleBlur = () => {
+    setIsEditing(false);
+    if (onTitleChange && newTitle !== title) {
+      onTitleChange(newTitle);
+    }
+  };
+
   const handleCheckboxClick = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
     onToggle(id);
@@ -58,7 +83,17 @@ export default function CheckListDetail({
     >
       {renderActiveTodos()}
       {renderCompletedTodos()}
-      <span>{title}</span>
+      {isEditing ? (
+        <input
+          className={styles.inputTodoTitle}
+          value={newTitle}
+          onChange={handleTitleChange}
+          onBlur={handleTitleBlur}
+          autoFocus
+        />
+      ) : (
+        <span onClick={handleTitleClick}>{title}</span>
+      )}
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { Todo } from "@/types";
-import { fetchTodos, createTodo, toggleTodoStatus } from "@/api";
+import { fetchTodos, createTodo, updateTodo } from "@/api";
 
 import TodoInput from "./mainpage/TodoInput";
 import Lists from "./mainpage/Lists";
@@ -41,16 +41,11 @@ export default function Home() {
     const target = todos.find((todo) => todo.id === id);
     if (!target) return;
 
-    toggleTodoStatus(id, !target.isCompleted).then((updated) => {
-      const updatedTodo = {
-        id: updated.id,
-        name: updated.content,
-        isCompleted: updated.completed,
-      };
-      // API 즉시 반영
+    updateTodo(id, { isCompleted: !target.isCompleted }).then((updated) => {
+      // 즉시 반영
       setTodos((prev) =>
         prev.map((todo) =>
-          todo.id === id ? { ...todo, completed: updated.isCompleted } : todo
+          todo.id === id ? { ...todo, isCompleted: updated.isCompleted } : todo
         )
       );
     });

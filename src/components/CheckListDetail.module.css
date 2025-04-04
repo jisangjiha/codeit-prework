@@ -27,6 +27,10 @@
   background-color: var(--violet-200);
 }
 
+.inputTodoTitle {
+  background-color: transparent;
+}
+
 /* 모바일 */
 @media (max-width: 767px) {
 }

@@ -21,6 +21,7 @@ export default function Page() {
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(null);
   const [imageUrl, setImageUrl] = useState("");
   const [memo, setMemo] = useState("");
+  const [hasChanges, setHasChanges] = useState(false);
 
   useEffect(() => {
     if (!todoId) return;
@@ -30,12 +31,24 @@ export default function Page() {
         setCurrentTodo(foundTodo);
         setMemo(foundTodo.memo || "");
         setImageUrl(foundTodo.imageUrl || "");
+        setHasChanges(false);
       }
     });
   }, [todoId]);
 
+  useEffect(() => {
+    if (!currentTodo) return;
+
+    const isChanged =
+      memo !== (currentTodo.memo || "") ||
+      imageUrl !== (currentTodo.imageUrl || "");
+
+    setHasChanges(isChanged);
+  }, [memo, imageUrl, currentTodo]);
+
   const handleChangeTitle = (newTitle: string) => {
     if (!currentTodo || newTitle.trim() === "") return;
+
     updateTodo(todoId, { name: newTitle }).then((updatedData) => {
       setCurrentTodo((prev) => (prev ? { ...prev, ...updatedData } : prev));
     });
@@ -63,9 +76,14 @@ export default function Page() {
 
     updateTodo(todoId, updatedTodo).then((updatedData) => {
       setCurrentTodo((prev) => (prev ? { ...prev, ...updatedData } : prev));
+      setHasChanges(false);
       router.back();
     });
   };
+
+  const modifyButtonClass = hasChanges
+    ? `${styles.modifyButton} ${styles.hasChanges}`
+    : styles.modifyButton;
 
   const handleDelete = () => {
     if (!id) return;
@@ -92,7 +110,7 @@ export default function Page() {
       </div>
       <div className={styles.buttonContainer}>
         <Button
-          className={styles.modifyButton}
+          className={modifyButtonClass}
           checkOrX={true}
           buttonContent="수정 완료"
           onClickButton={handleModify}

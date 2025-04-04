@@ -1,35 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Todo } from "@/types";
+import { fetchTodos, createTodo, toggleTodoStatus } from "@/api";
+
 import TodoInput from "./mainpage/TodoInput";
 import Lists from "./mainpage/Lists";
-import { Todo } from "@/types";
 
 import styles from "./page.module.css";
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  // todo 새로 추가 > setTodos
+  useEffect(() => {
+    fetchTodos().then((data) => {
+      console.log("🚀 fetchTodos data:", data);
+      const formattedTodos = data.map((item: any) => ({
+        id: item.id,
+        text: item.name,
+        completed: item.isCompleted,
+      }));
+      setTodos(formattedTodos);
+    });
+  }, []);
+
   const addTodo = (text: string) => {
-    const newTodo: Todo = {
-      id: Date.now().toString(),
-      text,
-      completed: false,
-    };
-    const updatedTodos = [...todos, newTodo];
-    setTodos([...todos, newTodo]);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    if (!text.trim()) return;
+
+    createTodo(text).then((createdTodo) => {
+      const newTodo: Todo = {
+        id: createdTodo.id,
+        text: createdTodo.name,
+        completed: createdTodo.completed,
+      };
+      setTodos((prev) => [...prev, newTodo]);
+    });
   };
 
-  // todo completed 토글
   const toggleTodo = (id: string) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(updatedTodos);
+    const target = todos.find((todo) => todo.id === id);
+    if (!target) return;
 
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    toggleTodoStatus(id, !target.completed)
+      .then((updated) => {
+        const updatedTodo = {
+          id: updated.id,
+          text: updated.content,
+          completed: updated.completed,
+        };
+        // API 즉시 반영
+        setTodos((prev) =>
+          prev.map((todo) =>
+            todo.id === id ? { ...todo, completed: updated.isCompleted } : todo
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("할 일 상태 토글 실패:", error);
+      });
   };
 
   // 미완료 또는 완료된 todo 각 필터링

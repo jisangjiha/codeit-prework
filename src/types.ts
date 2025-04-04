@@ -1,7 +1,7 @@
 export interface Todo {
   id: string;
-  text: string;
-  completed: boolean;
+  name: string;
+  isCompleted: boolean;
   memo?: string;
-  image?: string;
+  imageUrl?: string;
 }

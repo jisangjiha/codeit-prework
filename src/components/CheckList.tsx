@@ -78,7 +78,7 @@ export default function CheckList({
                 onClick={(e) => handleCheckboxClick(e, todo.id)}
               />
               <span className={type === "done" ? "completed" : ""}>
-                {todo.text}
+                {todo.name}
               </span>
             </li>
           ))}

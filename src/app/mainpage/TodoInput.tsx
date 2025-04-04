@@ -7,7 +7,7 @@ import plus from "@/assets/plus.svg";
 import Image from "next/image";
 
 interface TodoInputProps {
-  onAddTodo: (text: string) => void;
+  onAddTodo: (name: string) => void;
 }
 
 export default function TodoInput({ onAddTodo }: TodoInputProps) {

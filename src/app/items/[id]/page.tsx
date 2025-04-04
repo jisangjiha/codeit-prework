@@ -71,7 +71,8 @@ export default function Page() {
       name: currentTodo.name,
       isCompleted: currentTodo.isCompleted,
       memo: memo,
-      imageUrl: imageUrl,
+      // imageUrl을 서버가 받을 수 있는 형식으로 가공
+      imageUrl: imageUrl.startsWith("data:") ? "" : imageUrl,
     };
 
     updateTodo(todoId, updatedTodo).then((updatedData) => {

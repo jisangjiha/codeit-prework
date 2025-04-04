@@ -1,4 +1,5 @@
-.detailContainer {
+.detailContainer,
+.detailContainerCompleted {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,20 +23,26 @@
   }
 }
 
+.detailContainerCompleted {
+  background-color: var(--violet-200);
+}
+
 /* 모바일 */
 @media (max-width: 767px) {
 }
 
 /* 테블릿 */
 @media (min-width: 768px) {
-  .detailContainer {
+  .detailContainer,
+  .detailContainerCompleted {
     width: 696px;
   }
 }
 
 /* 데스크탑 */
 @media (min-width: 1024px) {
-  .detailContainer {
+  .detailContainer,
+  .detailContainerCompleted {
     width: 996px;
   }
 }

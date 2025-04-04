@@ -17,16 +17,19 @@ export default function Home() {
       text,
       completed: false,
     };
+    const updatedTodos = [...todos, newTodo];
     setTodos([...todos, newTodo]);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
   // todo completed 토글
   const toggleTodo = (id: string) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
+    setTodos(updatedTodos);
+
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
   // 미완료 또는 완료된 todo 각 필터링

@@ -1,30 +1,71 @@
 "use client";
 
 import CheckListDetail from "@/components/CheckListDetail";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./page.module.css";
-import checkboxEmpty from "@/assets/checkbox-empty.svg";
-import checkboxFilled from "@/assets/checkbox-filled.svg";
 import imgBackgoround from "@/assets/img.svg";
 import fileAdd from "@/assets/fileAdd.svg";
 import fileChange from "@/assets/fileChange.svg";
 import Image from "next/image";
 import Button from "@/components/Button";
+import { Todo } from "@/types";
+import { useParams } from "next/navigation";
 
 export default function Page() {
-  const [isCompleted, setIsCompleted] = useState(false);
+  const params = useParams();
+  const tenantId = params.id as string;
+
+  const [currentTodo, setCurrentTodo] = useState<Todo | null>(null);
   const [imageUrl, setImageUrl] = useState("");
   const [memo, setMemo] = useState("");
+
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      const todos: Todo[] = JSON.parse(storedTodos);
+      const todo = todos.find((t) => t.id === tenantId);
+      if (todo) {
+        setCurrentTodo(todo);
+      }
+    }
+  }, [tenantId]);
+
+  const toggleTodo = () => {
+    if (!currentTodo) return;
+
+    // 현재 Todo의 완료 상태 토글
+    const updatedTodo = {
+      ...currentTodo,
+      completed: !currentTodo.completed,
+    };
+    setCurrentTodo(updatedTodo);
+
+    // 로컬스토리지의 todos도 업데이트
+    const storedTodos = localStorage.getItem("todos");
+    if (storedTodos) {
+      const todos: Todo[] = JSON.parse(storedTodos);
+      const updatedTodos = todos.map((t) =>
+        t.id === tenantId ? updatedTodo : t
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    }
+  };
 
   const handleModify = () => {};
   const handleDelete = () => {};
 
+  const todos = currentTodo ? [currentTodo] : [];
+  const activeTodos = todos.filter((todo) => !todo.completed);
+  const completedTodos = todos.filter((todo) => todo.completed);
+
   return (
     <div className={styles.container}>
       <CheckListDetail
-        icon={isCompleted ? checkboxFilled : checkboxEmpty}
-        title="내용 가져오기"
+        activeTodos={activeTodos}
+        completedTodos={completedTodos}
+        onToggle={() => toggleTodo()}
+        title={currentTodo?.text || "Todo 상세"}
       />
       <div className={styles.formContainer}>
         <div className={styles.imageContainer}>

@@ -11,20 +11,6 @@ body {
   background-color: #f9fafb;
 }
 
-header {
-  height: 60px;
-  border-bottom: 1px solid var(--slate-200);
-
-  background-color: #ffffff;
-
-  & a {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
 main {
   display: flex;
   flex-direction: column;
@@ -52,25 +38,4 @@ main {
   --rose-500: #f43f5e;
   --lime-300: #bef264;
   --amber-800: #92400e;
-}
-
-/* 모바일 */
-@media (max-width: 767px) {
-  .mainLogo {
-    display: none;
-  }
-}
-
-/* 테블릿 */
-@media (min-width: 768px) {
-  .miniLogo {
-    display: none;
-  }
-}
-
-/* 데스크탑 */
-@media (min-width: 1024px) {
-  .miniLogo {
-    display: none;
-  }
 }

@@ -1,7 +1,5 @@
-import Link from "next/link";
 import "./globals.css";
-import mainLogo from "../assets/main-logo.svg";
-import Image from "next/image";
+import Header from "../components/Header";
 
 export default function RootLayout({
   children,
@@ -12,11 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div>
-          <header>
-            <Link href={"/"}>
-              <Image src={mainLogo} alt={""} />
-            </Link>
-          </header>
+          <Header />
           <main>{children}</main>
         </div>
       </body>

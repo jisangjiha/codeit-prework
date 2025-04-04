@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, KeyboardEvent } from "react";
+import React, { useState, KeyboardEvent, useEffect } from "react";
 
 import styles from "./TodoInput.module.css";
-import plus from "@/assets/plus.svg";
-import Image from "next/image";
+import Button from "@/components/Button";
 
 interface TodoInputProps {
   onAddTodo: (name: string) => void;
@@ -26,6 +25,8 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
     }
   };
 
+  const hasChanges = newTodo.trim() !== "";
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     // isComposing 속성으로 한글 입력 중인지 확인
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
@@ -43,17 +44,13 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
         onChange={onChangeTodoInput}
         onKeyDown={handleKeyDown}
       />
-      <button
+      <Button
         className={styles.addButton}
-        //className={todos?.length ? styles.addButton : styles.coloredAddButton}
-        type="button"
-        onClick={handleSubmit}
-      >
-        <div className={styles.inlineButton}>
-          <Image src={plus} alt={""} />
-          <div>추가하기</div>
-        </div>
-      </button>
+        icon="plus"
+        buttonContent="추가하기"
+        onClickButton={handleSubmit}
+        hasChanges={hasChanges}
+      />
     </div>
   );
 }

@@ -82,46 +82,8 @@
 }
 
 .buttonContainer {
-  & button {
-    width: 168px;
-    height: 56px;
-
-    box-sizing: border-box;
-    border: 2px solid var(--slate-900);
-    border-radius: 24px;
-    box-shadow: 2px 2px var(--slate-900);
-  }
-}
-
-.modifyButton,
-.deleteButton {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  & img {
-    width: 16px;
-    height: 16px;
-    margin-right: 4px;
-  }
-}
-
-.modifyButton {
-  margin-right: 16px;
-  background-color: var(--slate-200);
-}
-
-.hasChanges {
-  background-color: var(--lime-300);
-}
-
-.deleteButton {
-  background-color: var(--rose-500);
-
-  & div {
-    color: #ffffff;
-  }
 }
 
 /* 모바일 */

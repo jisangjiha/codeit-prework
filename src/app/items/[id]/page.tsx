@@ -82,10 +82,6 @@ export default function Page() {
     });
   };
 
-  const modifyButtonClass = hasChanges
-    ? `${styles.modifyButton} ${styles.hasChanges}`
-    : styles.modifyButton;
-
   const handleDelete = () => {
     if (!id) return;
 
@@ -111,14 +107,15 @@ export default function Page() {
       </div>
       <div className={styles.buttonContainer}>
         <Button
-          className={modifyButtonClass}
-          checkOrX={true}
+          className={styles.modifyButton}
+          icon="check"
           buttonContent="수정 완료"
           onClickButton={handleModify}
+          hasChanges={hasChanges}
         />
         <Button
           className={styles.deleteButton}
-          checkOrX={false}
+          icon="x"
           buttonContent="삭제하기"
           onClickButton={handleDelete}
         />

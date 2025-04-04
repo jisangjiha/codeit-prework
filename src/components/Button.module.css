@@ -1,0 +1,63 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 168px;
+  height: 56px;
+
+  box-sizing: border-box;
+  border: 2px solid var(--slate-900);
+  border-radius: 24px;
+  box-shadow: 2px 2px var(--slate-900);
+
+  cursor: pointer;
+}
+
+.button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.modify {
+  background-color: var(--slate-200);
+  margin-right: 8px;
+}
+
+.modify.hasChanges {
+  background-color: var(--lime-300);
+}
+
+.delete {
+  background-color: var(--rose-500);
+
+  & div {
+    color: #ffffff;
+  }
+}
+
+.add {
+  background-color: var(--slate-200);
+  margin-left: 16px;
+}
+
+.add.hasChanges {
+  background-color: var(--violet-600);
+
+  & div {
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 767px) {
+  .add {
+    width: 56px;
+    margin-left: 8px;
+  }
+
+  .add div {
+    display: none;
+  }
+}

@@ -18,6 +18,7 @@ export default function Page() {
   const todoId = id as string;
   const router = useRouter();
 
+  const [initialTodo, setInitialTodo] = useState<Todo | null>(null);
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(null);
   const [imageUrl, setImageUrl] = useState("");
   const [memo, setMemo] = useState("");
@@ -28,6 +29,7 @@ export default function Page() {
 
     fetchTodos(todoId).then((foundTodo) => {
       if (foundTodo) {
+        setInitialTodo(foundTodo);
         setCurrentTodo(foundTodo);
         setMemo(foundTodo.memo || "");
         setImageUrl(foundTodo.imageUrl || "");
@@ -37,14 +39,16 @@ export default function Page() {
   }, [todoId]);
 
   useEffect(() => {
-    if (!currentTodo) return;
+    if (!currentTodo || !initialTodo) return;
 
     const isChanged =
+      currentTodo.name !== initialTodo.name ||
+      currentTodo.isCompleted !== initialTodo.isCompleted ||
       memo !== (currentTodo.memo || "") ||
       imageUrl !== (currentTodo.imageUrl || "");
 
     setHasChanges(isChanged);
-  }, [memo, imageUrl, currentTodo]);
+  }, [memo, imageUrl, currentTodo, initialTodo]);
 
   const handleChangeTitle = (newTitle: string) => {
     if (!currentTodo || newTitle.trim() === "") return;

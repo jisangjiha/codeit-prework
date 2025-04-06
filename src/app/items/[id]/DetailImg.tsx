@@ -1,3 +1,5 @@
+// 상세 페이지에서 이미지 업로드
+
 import Image from "next/image";
 import imgBackgoround from "@/assets/img.svg";
 import fileAdd from "@/assets/fileAdd.svg";

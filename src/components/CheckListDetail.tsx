@@ -1,3 +1,5 @@
+// 디테일 페이지에서의 할 일 목록 (타이틀)
+
 import { Todo } from "@/types";
 import styles from "./CheckListDetail.module.css";
 import Image from "next/image";
@@ -31,10 +33,13 @@ export default function CheckListDetail({
     setIsEditing(true);
   };
 
+  // 입력창에 내용 입력할 때마다 newTitle 상태 실시간 업데이트
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTitle(e.target.value);
   };
 
+  // 사용자가 input 포커스를 벗어났을 때 타이틀 수정 종료
+  // 내용 바뀌었으면 변경사항 onTitleChange(newTitle)
   const handleTitleBlur = () => {
     setIsEditing(false);
     if (onTitleChange && newTitle !== title) {
@@ -47,6 +52,7 @@ export default function CheckListDetail({
     onToggle(id);
   };
 
+  // 할 일 목록 불러올 때, checkbox icon 알맞는거 불러오기
   const renderActiveTodos = () => {
     return activeTodos.map((todo) => (
       <div key={todo.id}>
@@ -71,6 +77,7 @@ export default function CheckListDetail({
     ));
   };
 
+  // TODO/DONE 항목에 따라 박스 컬러 변경
   const hasCompletedTodos = completedTodos.length > 0;
 
   return (

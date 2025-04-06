@@ -1,3 +1,4 @@
+// 메인 페이지에서 TODO/DONE 목록 나눠서 불러오기
 "use client";
 
 import React from "react";

@@ -1,3 +1,5 @@
+// 메인 페이지
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -13,6 +15,7 @@ import styles from "./page.module.css";
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
+  // api formattedTodos > todos 상태 변경
   useEffect(() => {
     fetchTodos().then((data) => {
       const formattedTodos = data.map((item: any) => ({
@@ -24,6 +27,7 @@ export default function Home() {
     });
   }, []);
 
+  // TodoInput 할 일 추가하기 > api createTodo
   const addTodo = (name: string) => {
     if (!name.trim()) return;
 
@@ -37,6 +41,7 @@ export default function Home() {
     });
   };
 
+  // TODO/DONE 토글 변경 > api updateTodo
   const toggleTodo = (id: string) => {
     const target = todos.find((todo) => todo.id === id);
     if (!target) return;

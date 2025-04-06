@@ -1,3 +1,5 @@
+// 각 할 일 목록
+
 "use client";
 
 import React from "react";
@@ -37,6 +39,7 @@ export default function CheckList({
   const listItemClassName =
     type === "todo" ? styles.checkTodoList : styles.checkDoneList;
 
+  // 목록 클릭 시 각 해당하는 url 이동
   const handleClick = (id: string) => {
     router.push(`/items/${id}`);
   };

@@ -1,3 +1,5 @@
+// 할 일 입력하기 창
+
 "use client";
 
 import React, { useState, KeyboardEvent, useEffect } from "react";
@@ -16,6 +18,7 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
     setNewTodo(e.target.value);
   };
 
+  // 메인페이지의 onAddTodo prop으로 받아옴
   // 입력값이 빈문자열이나 공백이 아닌 경우 수행
   // 입력값을 props로 받아 전달
   const handleSubmit = () => {
@@ -25,8 +28,10 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
     }
   };
 
+  // 입력 창 내 새로운 입력 생기면 hasChanges 상태 변경
   const hasChanges = newTodo.trim() !== "";
 
+  // 엔터 입력으로 추가하기 버튼과 동일한 handleSubmit()
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     // isComposing 속성으로 한글 입력 중인지 확인
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {

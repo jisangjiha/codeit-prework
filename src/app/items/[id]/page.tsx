@@ -1,3 +1,5 @@
+// 상세 페이지
+
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
@@ -38,6 +40,7 @@ export default function Page() {
     });
   }, [todoId]);
 
+  // initialTodo와 currentTodo 비교하여 hasChanges 상태 변화 > 버튼 컬러 변경
   useEffect(() => {
     if (!currentTodo || !initialTodo) return;
 
@@ -50,6 +53,7 @@ export default function Page() {
     setHasChanges(isChanged);
   }, [memo, imageUrl, currentTodo, initialTodo]);
 
+  // 할 일 제목 변경 시 updateTodo 진행
   const handleChangeTitle = (newTitle: string) => {
     if (!currentTodo || newTitle.trim() === "") return;
 
@@ -58,6 +62,7 @@ export default function Page() {
     });
   };
 
+  // 할 일 완료/미완료 토글, updateTodo 변경
   const toggleTodo = () => {
     if (!currentTodo) return;
 
@@ -68,6 +73,7 @@ export default function Page() {
     );
   };
 
+  // 수정 완료 버튼 시 updateTodo 진행, 페이지 뒤로 가기
   const handleModify = () => {
     if (!currentTodo) return;
 
@@ -86,6 +92,7 @@ export default function Page() {
     });
   };
 
+  // 삭제하기 버튼 시 deleteTodo 진행, 페이지 뒤로 가기
   const handleDelete = () => {
     if (!id) return;
 

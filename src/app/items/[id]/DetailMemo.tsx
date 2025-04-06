@@ -1,3 +1,5 @@
+// 상세 페이지에서 메모 작성
+
 import styles from "@/app/items/[id]/page.module.css";
 
 interface DetailMemoProps {

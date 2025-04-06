@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🖥️ 프로젝트 소개
 
-## Getting Started
+todo list를 직관적으로 확인하고, 각 항목에 대해 이미지와 메모를 저장할 수 있어요.
 
-First, run the development server:
+[do it; 바로가기](codeit-prework.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⏲️ 개발기간
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 2025.04.01 ~ 2025.04.06
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ⚙️ 기술스택
 
-## Learn More
+- **Language**: <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>
 
-To learn more about Next.js, take a look at the following resources:
+- **Library**: <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **HTTP Client Library**: <img alt="Static Badge" src="https://img.shields.io/badge/Axios-5a29e4?style=flat&logo=Axios&logoColor=white">
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Style**: <img alt="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white">
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📌 주요 페이지
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 홈 페이지
+
+: 할 일을 등록하고, 완료/미완료 상태를 간단하게 check 할 수 있어요.
+
+![mainpage](https://github.com/user-attachments/assets/8ca29bd6-ab7a-4886-8c61-3e59130a514b)
+
+### 상세 페이지
+
+: 각 할 일 목록에 대해 수정/삭제 할 수 있고, 이미지 및 메모를 추가할 수 있어요.
+
+![detailpage final](https://github.com/user-attachments/assets/0c4023bf-bf8d-45fb-a2dd-adf1196ca8b8)
+
+
+### 반응형 페이지
+
+: 모든 페이지는 핸드폰/테블릿/데스크탑에 대한 반응형 UI로 구현했어요.
+
+![화면-기록-2025-04-06-오후-4 33 27](https://github.com/user-attachments/assets/6f4cdae5-e3d2-4e6b-a4d2-1e1153a87caf)

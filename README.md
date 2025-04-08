@@ -1,8 +1,8 @@
 ## 🖥️ 프로젝트 소개
 
-todo list를 직관적으로 확인하고, 각 항목에 대해 이미지와 메모를 저장할 수 있어요.
+### todo list를 직관적으로 확인하고, 각 항목에 대해 이미지와 메모를 저장할 수 있어요.
 
-[do it; 바로가기](codeit-prework.vercel.app)
+[✏️ do it; 바로가기](https://codeit-prework.vercel.app)
 <img width="1920" alt="홈페이지" src="https://github.com/user-attachments/assets/c6535245-51bc-46f2-96b1-1df20b6b0dfc" />
 <img width="1920" alt="상세 페이지" src="https://github.com/user-attachments/assets/c4f2b67a-b406-4a7f-a663-2666f22a71ad" />
 

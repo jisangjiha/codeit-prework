@@ -23,8 +23,11 @@ export default function Page() {
   const [initialTodo, setInitialTodo] = useState<Todo | null>(null);
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
   const [memo, setMemo] = useState("");
   const [hasChanges, setHasChanges] = useState(false);
+
+  useEffect(() => {}, [imageUrl]);
 
   useEffect(() => {
     if (!todoId) return;
@@ -74,15 +77,22 @@ export default function Page() {
   };
 
   // 수정 완료 버튼 시 updateTodo 진행, 페이지 뒤로 가기
-  const handleModify = () => {
+  const handleModify = (finalImageUrl?: string) => {
     if (!currentTodo) return;
+
+    // imageUrl이 아직 서버에 업로드 안 된 경우를 걸러내기
+    // blob:, data: URL은 브라우저에서만 쓰는 임시 미리보기 URL
+    const cleanImageUrl =
+      finalImageUrl ??
+      (imageUrl.startsWith("blob:") || imageUrl.startsWith("data:")
+        ? ""
+        : imageUrl);
 
     const updatedTodo = {
       name: currentTodo.name,
       isCompleted: currentTodo.isCompleted,
       memo: memo,
-      // imageUrl을 서버가 받을 수 있는 형식으로 가공
-      imageUrl: imageUrl.startsWith("data:") ? "" : imageUrl,
+      imageUrl: cleanImageUrl,
     };
 
     updateTodo(todoId, updatedTodo).then((updatedData) => {
@@ -113,7 +123,11 @@ export default function Page() {
         onTitleChange={handleChangeTitle}
       />
       <div className={styles.formContainer}>
-        <DetailImg imageUrl={imageUrl} setImageUrl={setImageUrl} />
+        <DetailImg
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          setIsUploading={setIsUploading}
+        />
         <DetailMemo memo={memo} onChangeMemo={setMemo} />
       </div>
       <div className={styles.buttonContainer}>
@@ -121,8 +135,9 @@ export default function Page() {
           className={styles.modifyButton}
           icon="check"
           buttonContent="수정 완료"
-          onClickButton={handleModify}
+          onClickButton={() => handleModify(imageUrl)}
           hasChanges={hasChanges}
+          disabled={isUploading}
         />
         <Button
           className={styles.deleteButton}

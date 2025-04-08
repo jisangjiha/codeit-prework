@@ -50,3 +50,21 @@ export const deleteTodo = (id: string) => {
     return res.json();
   });
 };
+
+// 이미지 업로드
+export const uploadImage = (file: File) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  return fetch(`${baseUrl}/api/${tenantId}/images/upload`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("이미지 업로드 실패");
+      }
+      return res.json();
+    })
+    .then((data) => data.url);
+};

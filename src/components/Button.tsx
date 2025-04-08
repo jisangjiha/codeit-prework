@@ -13,6 +13,7 @@ interface ButtonProps {
   buttonContent: string;
   onClickButton: any;
   hasChanges?: boolean;
+  disabled?: boolean;
 }
 
 // 아이콘 선택 로직
@@ -46,12 +47,17 @@ export default function Button({
   buttonContent,
   onClickButton,
   hasChanges,
+  disabled,
 }: ButtonProps) {
   const buttonClass = getButtonClass(icon, hasChanges);
   const iconSrc = getIcon(icon, hasChanges);
 
   return (
-    <button className={`${buttonClass} ${className}`} onClick={onClickButton}>
+    <button
+      className={`${buttonClass} ${className}`}
+      onClick={onClickButton}
+      disabled={disabled}
+    >
       <Image src={iconSrc} alt={buttonContent} />
       <div>{buttonContent}</div>
     </button>

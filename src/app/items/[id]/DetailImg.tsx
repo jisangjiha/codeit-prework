@@ -12,12 +12,14 @@ import styles from "@/app/items/[id]/page.module.css";
 interface DetailImgProps {
   imageUrl: string;
   setImageUrl: (url: string) => void;
+  isUploading: boolean;
   setIsUploading: (uploading: boolean) => void;
 }
 
 export default function DetailImg({
   imageUrl,
   setImageUrl,
+  isUploading,
   setIsUploading,
 }: DetailImgProps) {
   const [previewUrl, setPreviewUrl] = useState<string>(imageUrl);
@@ -72,7 +74,9 @@ export default function DetailImg({
 
   return (
     <div className={styles.imageContainer}>
-      {previewUrl ? (
+      {isUploading ? (
+        <div className={styles.imgUploading}>이미지 업로드 중...</div>
+      ) : previewUrl ? (
         <Image
           className={styles.uploadedImg}
           src={previewUrl}

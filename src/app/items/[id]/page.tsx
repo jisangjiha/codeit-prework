@@ -126,6 +126,7 @@ export default function Page() {
         <DetailImg
           imageUrl={imageUrl}
           setImageUrl={setImageUrl}
+          isUploading={isUploading}
           setIsUploading={setIsUploading}
         />
         <DetailMemo memo={memo} onChangeMemo={setMemo} />

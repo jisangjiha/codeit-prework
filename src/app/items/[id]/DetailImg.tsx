@@ -72,12 +72,20 @@ export default function DetailImg({
 
   return (
     <div className={styles.imageContainer}>
-      <Image
-        className={styles.uploadedImg}
-        src={previewUrl || imgBackground}
-        alt="이미지 미리보기"
-        fill
-      />
+      {previewUrl ? (
+        <Image
+          className={styles.uploadedImg}
+          src={previewUrl}
+          alt="업로드된 이미지"
+          fill
+        />
+      ) : (
+        <Image
+          className={styles.imgBackground}
+          src={imgBackground}
+          alt="기본 배경 이미지"
+        />
+      )}
       <label
         className={styles.fileButton}
         htmlFor="todoImage"
